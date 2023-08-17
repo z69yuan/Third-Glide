@@ -3,6 +3,7 @@ import se.bjurr.violations.gradle.plugin.ViolationsTask
 
 buildscript {
     repositories {
+        maven { url 'https://maven.aliyun.com/repository/public/' }
         google()
         mavenCentral()
         gradlePluginPortal()
@@ -25,6 +26,7 @@ buildscript {
 }
 
 repositories {
+    maven { url 'https://maven.aliyun.com/repository/public/' }
     google()
     mavenCentral()
 }
@@ -64,6 +66,7 @@ afterEvaluate {
 
 subprojects { project ->
     repositories {
+        maven { url 'https://maven.aliyun.com/repository/public/' }
         google()
         mavenCentral()
         maven {
