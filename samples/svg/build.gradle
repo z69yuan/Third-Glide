@@ -1,10 +1,14 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 dependencies {
     implementation project(':library')
     annotationProcessor project(':annotation:compiler')
     implementation libs.svg
     implementation libs.androidx.fragment
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10"
 }
 
 android {
@@ -12,7 +16,7 @@ android {
     compileSdkVersion libs.versions.compile.sdk.version.get()
 
     defaultConfig {
-        minSdk libs.versions.min.sdk.version.get() as int
+        minSdk 26
         targetSdk libs.versions.target.sdk.version.get() as int
 
         versionCode 1
