@@ -336,7 +336,7 @@ public final class Downsampler {
             ? (isRotationRequired(degreesToRotate) ? sourceHeight : sourceWidth)
             : requestedWidth;
     int targetHeight =
-        requestedHeight == Target.SIZE_ORIGINAL
+        requestedHeight == Target.SIZE_ORIGINAL //解码前 判断大小是 ORIGIN 还是请求大小
             ? (isRotationRequired(degreesToRotate) ? sourceWidth : sourceHeight)
             : requestedHeight;
 
@@ -777,7 +777,7 @@ public final class Downsampler {
     String outMimeType = options.outMimeType;
     final Bitmap result;
     TransformationUtils.getBitmapDrawableLock().lock();
-    try {
+    try { // ImageReader$InputStreamImageReader
       result = imageReader.decodeBitmap(options);
     } catch (IllegalArgumentException e) {
       IOException bitmapAssertionException =

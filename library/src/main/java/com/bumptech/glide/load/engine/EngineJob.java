@@ -156,6 +156,7 @@ class EngineJob<R> implements DecodeJob.Callback<R>, Poolable {
       // This is overly broad, some Glide code is actually called here, but it's much
       // simpler to encapsulate here than to do so at the actual call point in the
       // Request implementation.
+      // 这里已经解码完成了，engineResource  REMOTE ,  false
       cb.onResourceReady(engineResource, dataSource, isLoadedFromAlternateCacheKey);
     } catch (Throwable t) {
       throw new CallbackException(t);
@@ -243,6 +244,7 @@ class EngineJob<R> implements DecodeJob.Callback<R>, Poolable {
       } else if (hasResource) {
         throw new IllegalStateException("Already have resource");
       }
+      // 将Resource包装成了EngineResource对象
       engineResource = engineResourceFactory.build(resource, isCacheable, key, resourceListener);
       // Hold on to resource for duration of our callbacks below so we don't recycle it in the
       // middle of notifying if it synchronously released by one of the callbacks. Acquire it under

@@ -452,12 +452,12 @@ public final class SingleRequest<R> implements Request, SizeReadyCallback, Resou
       if (IS_VERBOSE_LOGGABLE) {
         logV("Got onSizeReady in " + LogTime.getElapsedMillis(startTime));
       }
-      if (status != Status.WAITING_FOR_SIZE) {
+      if (status != Status.WAITING_FOR_SIZE) { // wait for size
         return;
       }
       status = Status.RUNNING;
 
-      float sizeMultiplier = requestOptions.getSizeMultiplier();
+      float sizeMultiplier = requestOptions.getSizeMultiplier(); // 放大倍数
       this.width = maybeApplySizeMultiplier(width, sizeMultiplier);
       this.height = maybeApplySizeMultiplier(height, sizeMultiplier);
 
@@ -470,7 +470,7 @@ public final class SingleRequest<R> implements Request, SizeReadyCallback, Resou
               model,
               requestOptions.getSignature(),
               this.width,
-              this.height,
+              this.width,
               requestOptions.getResourceClass(),
               transcodeClass,
               priority,
@@ -556,7 +556,7 @@ public final class SingleRequest<R> implements Request, SizeReadyCallback, Resou
           onLoadFailed(exception);
           return;
         }
-
+        // 这里已经是BitmapDrawable了
         Object received = resource.get();
         if (received == null || !transcodeClass.isAssignableFrom(received.getClass())) {
           toRelease = resource;
@@ -638,7 +638,7 @@ public final class SingleRequest<R> implements Request, SizeReadyCallback, Resou
               + LogTime.getElapsedMillis(startTime)
               + " ms");
     }
-
+    // TODO zfc 这句话是什么含义？
     notifyRequestCoordinatorLoadSucceeded();
 
     isCallingCallbacks = true;

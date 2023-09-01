@@ -80,7 +80,7 @@ class ResourceCacheGenerator implements DataFetcherGenerator, DataFetcher.DataCa
                 helper.getArrayPool(),
                 sourceId,
                 helper.getSignature(),
-                helper.getWidth(),
+                helper.getWidth(), // 宽高设置
                 helper.getHeight(),
                 transformation,
                 resourceClass,

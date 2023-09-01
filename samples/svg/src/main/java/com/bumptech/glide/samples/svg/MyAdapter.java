@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
@@ -42,6 +43,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         .load(url)
         .placeholder(R.drawable.image_loading)
         .error(R.drawable.image_error)
+        .skipMemoryCache(true)
+        .diskCacheStrategy(DiskCacheStrategy.NONE)
         .listener(new RequestListener<Drawable>() {
           @Override
           public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model,
@@ -53,7 +56,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
           public boolean onResourceReady(@NonNull Drawable resource, @NonNull Object model,
               Target<Drawable> target, @NonNull DataSource dataSource, boolean isFirstResource) {
             int width = resource.getIntrinsicWidth();
-            int height = resource.getIntrinsicHeight();
+            int height = resource.getIntrinsicHeight(); // 再看一下解码的逻辑
             Log.e("MyAdapter", "width = " + width + " height = " + height);
             // 获取屏幕宽度
             int screenWidth = mContext.getResources().getDisplayMetrics().widthPixels;
@@ -62,7 +65,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
             // 计算图片高度
             int imageHeight = (int) (height * scale);
             Log.e("zfc","imageHeight = " + imageHeight);
-            (holder.iv.getLayoutParams()).height = imageHeight;
+//            (holder.iv.getLayoutParams()).height = imageHeight;
             return false;
           }
         })

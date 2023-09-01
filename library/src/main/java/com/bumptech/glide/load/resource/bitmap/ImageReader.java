@@ -189,7 +189,7 @@ interface ImageReader {
     }
 
     @Nullable
-    @Override
+    @Override // 我服了， 居然用BitmapFactory去解码数据流
     public Bitmap decodeBitmap(BitmapFactory.Options options) throws IOException {
       return BitmapFactory.decodeStream(dataRewinder.rewindAndGet(), null, options);
     }

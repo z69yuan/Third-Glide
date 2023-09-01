@@ -213,7 +213,7 @@ final class DecodeHelper<Transcode> {
       //noinspection ForLoopReplaceableByForEach to improve perf
       for (int i = 0, size = modelLoaders.size(); i < size; i++) {
         ModelLoader<Object, ?> modelLoader = modelLoaders.get(i);
-        LoadData<?> current = modelLoader.buildLoadData(model, width, height, options);
+        LoadData<?> current = modelLoader.buildLoadData(model, width, height, options);// StringLoader
         if (current != null) {
           loadData.add(current);
         }

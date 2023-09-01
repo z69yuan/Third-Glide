@@ -359,9 +359,9 @@ public abstract class ViewTarget<T extends View, Z> extends BaseTarget<Z> {
         return;
       }
 
-      int currentWidth = getTargetWidth();
-      int currentHeight = getTargetHeight();
-      if (!isViewStateAndSizeValid(currentWidth, currentHeight)) {
+      int currentWidth = getTargetWidth(); // 获取View的宽度
+      int currentHeight = getTargetHeight();// 获取View的高度
+      if (!isViewStateAndSizeValid(currentWidth, currentHeight)) { // 有效的判断条件是 正数或者原图
         return;
       }
 
@@ -382,7 +382,7 @@ public abstract class ViewTarget<T extends View, Z> extends BaseTarget<Z> {
       if (!cbs.contains(cb)) {
         cbs.add(cb);
       }
-      if (layoutListener == null) {
+      if (layoutListener == null) { // 通过ViewTreeObserver获取View的宽高
         ViewTreeObserver observer = view.getViewTreeObserver();
         layoutListener = new SizeDeterminerLayoutListener(this);
         observer.addOnPreDrawListener(layoutListener);
@@ -429,7 +429,7 @@ public abstract class ViewTarget<T extends View, Z> extends BaseTarget<Z> {
       int horizontalPadding = view.getPaddingLeft() + view.getPaddingRight();
       LayoutParams layoutParams = view.getLayoutParams();
       int layoutParamSize = layoutParams != null ? layoutParams.width : PENDING_SIZE;
-      return getTargetDimen(view.getWidth(), layoutParamSize, horizontalPadding);
+      return getTargetDimen(view.getWidth(), layoutParamSize, horizontalPadding); // 1080 是通过view.getWidth()获取的
     }
 
     private int getTargetDimen(int viewSize, int paramSize, int paddingSize) {
@@ -504,7 +504,7 @@ public abstract class ViewTarget<T extends View, Z> extends BaseTarget<Z> {
       }
 
       @Override
-      public boolean onPreDraw() {
+      public boolean onPreDraw() { // 首次View绘制时？TODO zfc
         if (Log.isLoggable(TAG, Log.VERBOSE)) {
           Log.v(TAG, "OnGlobalLayoutListener called attachStateListener=" + this);
         }

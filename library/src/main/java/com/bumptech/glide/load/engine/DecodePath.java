@@ -89,6 +89,7 @@ public class DecodePath<DataType, ResourceType, Transcode> {
         DataType data = rewinder.rewindAndGet();
         if (decoder.handles(data, options)) {
           data = rewinder.rewindAndGet();
+          // 解码接口， 那么解码是怎么进行选路的？ TODO zfc 解码选路     BitmapDrawableDecoder
           result = decoder.decode(data, width, height, options);
         }
         // Some decoders throw unexpectedly. If they do, we shouldn't fail the entire load path, but

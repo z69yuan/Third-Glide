@@ -498,8 +498,8 @@ class DecodeJob<R>
 
   @SuppressWarnings("unchecked")
   private <Data> Resource<R> decodeFromFetcher(Data data, DataSource dataSource)
-      throws GlideException {
-    LoadPath<Data, ?, R> path = decodeHelper.getLoadPath((Class<Data>) data.getClass());
+      throws GlideException {  // ContentLengthInputStream
+    LoadPath<Data, ?, R> path = decodeHelper.getLoadPath((Class<Data>) data.getClass()); // LoadPath{decodePaths=[DecodePath{ dataClass=class com.bumptech.glide.util.ContentLengthInputStream, decoders=[com.bumptech.glide.load.resource.drawable.AnimatedImageDecoder$StreamAnimatedImageDecoder@366dd01, com.bumptech.glide.load.resource.gif.StreamGifDecoder@9e897a6, com.bumptech.glide.load.resource.bitmap.BitmapDrawableDecoder@6a155e7], transcoder=com.bumptech.glide.load.resource.transcode.UnitTranscoder@2882594}, DecodePath{ dataClass=class com.bumptech.glide.util.ContentLengthInputStream, decoders=[com.bumptech.glide.load.resource.gif.StreamGifDecoder@9e897a6], transcoder=com.bumptech.glide.load.resource.transcode.UnitTranscoder@2882594}, DecodePath{ dataClass=class com.bumptech.glide.util.ContentLengthInputStream, decoders=[com.bumptech.glide.load.resource.bitmap.StreamBitmapDecoder@3e3483d], transcoder=com.bumptech.glide.load.resource.transcode.BitmapDrawableTranscoder@3f68832}, DecodePath{ dataClass=class com.bumptech.glide.util.ContentLengthInputStream, decoders=[com.bumptech.glide.load.resource.bitmap.BitmapDrawableDecoder@6a155e7], transcoder=com.bumptech.glide.load.resource.transcode.UnitTranscoder@2882594}, DecodePath{ dataClass=class com.bumptech.glide.util.ContentLengthInputStream, decoders=[com.bumptech.glide.samples.svg.SvgDecoder@6236983], transcoder=com.bumptech.glide.samples.svg.SvgDrawableTranscoder@58c0700}]}
     return runLoadPath(data, dataSource, path);
   }
 
@@ -531,7 +531,7 @@ class DecodeJob<R>
 
   private <Data, ResourceType> Resource<R> runLoadPath(
       Data data, DataSource dataSource, LoadPath<Data, ResourceType, R> path)
-      throws GlideException {
+      throws GlideException {  // data: ContentLengthInputStream , length = 10452
     Options options = getOptionsWithHardwareConfig(dataSource);
     DataRewinder<Data> rewinder = glideContext.getRegistry().getRewinder(data);
     try {
