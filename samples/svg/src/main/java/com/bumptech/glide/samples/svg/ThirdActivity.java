@@ -28,40 +28,38 @@ public class ThirdActivity extends FragmentActivity {
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_second);
-    final RecyclerView recyclerView = findViewById(R.id.rcl_v);
-    recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    List<String> mData = new ArrayList<>();
-    mData.add(URL_IMAGE);
-    mData.add(URL_IMAGE1);
-    mData.add(URL_IMAGE2);
-    recyclerView.setAdapter(new MyAdapter(this,mData));
 
 
-    final ImageView vx = findViewById(R.id.iv_1);
-    GlideApp.with(this)
-        .load(URL_IMAGE)
-        .placeholder(R.drawable.image_loading)
-        .error(R.drawable.image_error)
-        .into(vx);
 
-    final ImageView vx1 = findViewById(R.id.iv_2);
-    GlideApp.with(this)
-        .load(URL_IMAGE2)
-        .placeholder(R.drawable.image_loading)
-        .error(R.drawable.image_error)
-        .into(vx1);
+    findViewById(R.id.btn_load).setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View view) {
 
-//    final ImageView vx = findViewById(R.id.iv_image);
-//    findViewById(R.id.btn_load).setOnClickListener(new OnClickListener() {
-//      @Override
-//      public void onClick(View view) {
-//        Glide.with(ThirdActivity.this)
-//            .load(URL_IMAGE)
+        final RecyclerView recyclerView = findViewById(R.id.rcl_v);
+        recyclerView.setLayoutManager(new LinearLayoutManager(ThirdActivity.this));
+        List<String> mData = new ArrayList<>();
+        mData.add(URL_IMAGE);
+//    mData.add(URL_IMAGE1);
+        mData.add(URL_IMAGE2);
+        recyclerView.setAdapter(new MyAdapter(ThirdActivity.this,mData));
+
+
+        final ImageView vx = findViewById(R.id.iv_1);
+        GlideApp.with(ThirdActivity.this)
+            .load(URL_IMAGE)
+            .placeholder(R.drawable.image_loading)
+            .error(R.drawable.image_error)
+            .into(vx);
+
+
+//        final ImageView vx1 = findViewById(R.id.iv_2);
+//        GlideApp.with(ThirdActivity.this)
+//            .load(URL_IMAGE2)
 //            .placeholder(R.drawable.image_loading)
 //            .error(R.drawable.image_error)
-//            .into(vx);
-//      }
-//    });
+//            .into(vx1);
+      }
+    });
 
   }
 }
